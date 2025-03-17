@@ -1,6 +1,6 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import BackButton from "./BackButton";
-import { setCategories, selectCategory } from "../hangmanSlice";
+import { setCategories, selectCategory, startGame } from "../hangmanSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -9,14 +9,13 @@ function PickACategory() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-
-
   useEffect(() => {
     dispatch(setCategories(categories));
   }, [dispatch, categories]);
 
   function handleSelectCategory(category) {
     dispatch(selectCategory({ category, words: categories[category] }));
+    dispatch(startGame())
     navigate(`/pick-a-category/${category}`);
   }
 

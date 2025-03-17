@@ -17,7 +17,12 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(24, 23, 107, 0.8); /* You can change this to any color */
+  background-color: rgba(
+    24,
+    23,
+    107,
+    0.8
+  ); /* You can change this to any color */
   z-index: -1; /* Keeps it below content */
   pointer-events: none; /* Ensures it doesn't block interactions */
 }
@@ -28,18 +33,16 @@
 }
 
 #Hero {
-  background-image: url("./images/background-desktop.svg");
+  background-image: url("/images/background-desktop.svg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: bottom;
   min-height: 100svh;
-  margin: 0;
-
 }
 
 @media (max-width: 960px) {
   #Hero {
-    background-image: url("./images/background-tablet.svg");
+    background-image: url("/images/background-tablet.svg");
     background-repeat: no-repeat;
 
     background-size: cover;
@@ -47,10 +50,9 @@
 }
 @media (max-width: 576px) {
   #Hero {
-    background-image: url("./images/background-mobile.svg");
+    background-image: url("/images/background-mobile.svg");
     background-repeat: no-repeat;
 
     background-size: cover;
   }
 }
-

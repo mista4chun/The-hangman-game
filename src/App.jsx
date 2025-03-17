@@ -2,7 +2,7 @@ import AppLayout from "./AppLayout";
 import HowToPlay from "./components/HowToPlay";
 import Home from "./components/Home";
 import PickACategory from "./components/PickACategory";
-import RandomWord from "./components/RandomWord";
+import InGame from "./components/InGame";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { fetchCategories } from "./components/PickACategory";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/pick-a-category/:category",
-        element: <RandomWord />,
+        element: <InGame />,
       },
       {
         path: "/how-to-play",

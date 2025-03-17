@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 
 function AppLayout() {
   const location = useLocation();
+  const { category } = useParams();
   const [overlayOpacity, setOverlayOpacity] = useState(0);
 
   useEffect(() => {
-    switch (location.pathname) {
+    const decodedPathname = decodeURIComponent(location.pathname);// Decode %20 to space
+    
+    switch (decodedPathname) {
       case "/":
         setOverlayOpacity(0);
         break;
@@ -18,15 +21,20 @@ function AppLayout() {
       case "/pick-a-category":
         setOverlayOpacity(0.7);
         break;
-      case "/pick-a-category/:category":
-        setOverlayOpacity(0.7);
-        break;
+
+      // case `/pick-a-category/${category}`:
+      //   setOverlayOpacity(0.7);
+      //   break;
 
       default:
-        setOverlayOpacity(0);
+        if (decodedPathname.startsWith("/pick-a-category/")) {
+          setOverlayOpacity(0.7);
+        } else {
+          setOverlayOpacity(0);
+        }
         break;
     }
-  }, [location.pathname]);
+  }, [location.pathname, category]);
   return (
     <>
       <div
