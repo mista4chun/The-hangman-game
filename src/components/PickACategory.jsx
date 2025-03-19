@@ -26,11 +26,11 @@ function PickACategory() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2, // Stagger effect
-        duration: 0.5, // Smooth timing
+        delay: i * 0.2,
+        duration: 0.5, 
         type: "spring",
-        stiffness: 200, // More stiffness for bounce
-        damping: 8, // Controls the bounce intensity
+        stiffness: 200, 
+        damping: 8, 
       },
     }),
   };
@@ -60,7 +60,7 @@ function PickACategory() {
               variants={buttonVariants}
               initial="hidden"
               animate="visible"
-              custom={i} // Pass index to stagger
+              custom={i} 
               key={category}
               onClick={() => handleSelectCategory(category)}
               className="h-[4.8125rem] w-[20.25rem] rounded-[1.25rem] bg-[#2463FF] shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#3b74ff] hover:bg-[#3b74ff] hover:shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#2463ff] md:h-[11.416875rem] md:rounded-[2.5rem] lg:h-[11.875rem] lg:w-[24rem] lg:rounded-[2.5rem]"

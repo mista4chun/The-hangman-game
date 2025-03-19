@@ -22,14 +22,14 @@
     23,
     107,
     0.8
-  ); /* You can change this to any color */
-  z-index: -1; /* Keeps it below content */
-  pointer-events: none; /* Ensures it doesn't block interactions */
+  ); 
+  z-index: -1;
+  pointer-events: none; 
 }
 
 .content {
   position: relative;
-  z-index: 1; /* Ensures content is on top */
+  z-index: 1; 
 }
 
 #Hero {

@@ -9,7 +9,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 function InGame() {
   const word = useSelector((state) => state.hangman.word);
-  console.log(word);
+ 
   const { guessedLetters, inCorrectGuesses, isGameOver, showModal } =
     useSelector((state) => state.hangman);
   const guessedCorrectly = useSelector(

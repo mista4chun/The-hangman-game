@@ -29,11 +29,11 @@ function HowToPlay() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2, // Stagger effect
-        duration: 0.5, // Smooth timing
+        delay: i * 0.2, 
+        duration: 0.5, 
         type: "spring",
-        stiffness: 200, // More stiffness for bounce
-        damping: 8, //
+        stiffness: 200, 
+        damping: 8, 
       },
     }),
   };
