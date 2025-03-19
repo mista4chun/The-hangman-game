@@ -5,7 +5,7 @@ import PauseMenu from "./PauseMenu";
 import { toggleModal, toggleModal2 } from "../hangmanSlice";
 import { useEffect } from "react";
 import WinLoseMenu from "./WinLoseMenu";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 function InGame() {
   const word = useSelector((state) => state.hangman.word);
@@ -38,7 +38,13 @@ function InGame() {
       {showModal && <PauseMenu />}
       {isGameOver && <WinLoseMenu imgSrc={modalImage} />}
       <AnimatePresence>
-        <div className="mx-auto mb-14 flex max-w-6xl items-center justify-between px-8 pt-5">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto mb-14 flex max-w-6xl items-center justify-between px-8 pt-5"
+        >
           <div className="flex items-center gap-6 lg:gap-12">
             <button
               onClick={() => dispatch(toggleModal())}
@@ -69,10 +75,20 @@ function InGame() {
               className="h-[1.5rem] w-[1.635rem] md:h-[3.058125rem] md:w-[3.333125rem]"
             />
           </div>
-        </div>
+        </motion.div>
       </AnimatePresence>
 
-      <div className="flex flex-col items-center">
+      <motion.div
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 200,
+          damping: 8,
+          duration: 0.6,
+        }}
+        className="flex flex-col items-center"
+      >
         <div className="-z-10 mb-16 flex flex-col items-center gap-2">
           {word.split(" ").map((wordPart, wordIndex) => (
             <div key={wordIndex} className="flex gap-4">
@@ -95,9 +111,9 @@ function InGame() {
           ))}
         </div>
 
+      </motion.div>
         {/* Keypad */}
-        <KeyPad />
-      </div>
+      <KeyPad />
     </>
   );
 }

@@ -1,5 +1,5 @@
 import BackButton from "./BackButton";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 const cards = [
   {
@@ -29,53 +29,63 @@ function HowToPlay() {
       opacity: 1,
       y: 0,
       transition: {
-        delay: i * 0.2, // Stagger effect (each button comes in one after the other)
-        duration: 0.5,
+        delay: i * 0.2, // Stagger effect
+        duration: 0.5, // Smooth timing
         type: "spring",
+        stiffness: 200, // More stiffness for bounce
+        damping: 8, //
       },
     }),
   };
 
   return (
-    <div className="container mx-auto max-w-7xl px-8 pt-10">
-      <div className="flex items-center justify-between">
-        <BackButton />
+    <AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        exit={{ opacity: 0, scale: 0.8 }}
+        transition={{ duration: 0.5 }}
+        className="container mx-auto max-w-7xl px-8 pt-10"
+      >
+        <div className="flex items-center justify-between">
+          <BackButton />
 
-        <img
-          src="./images/How-to-Play.svg"
-          alt=""
-          className="mx-0 md:mx-auto md:h-[10.1875rem] md:w-[28rem]"
-        />
-      </div>
+          <img
+            src="./images/How-to-Play.svg"
+            alt=""
+            className="mx-0 md:mx-auto md:h-[10.1875rem] md:w-[28rem]"
+          />
+        </div>
 
-      <div className="flex flex-col gap-8 px-0 pt-20 lg:flex-row lg:pt-12">
-        {cards.map((card, i) => (
-          <motion.div
-            variants={divVariants}
-            initial="hidden"
-            animate="visible"
-            custom={i}
-            key={card.index}
-            className="h-[11.5625rem] w-[22.5rem] rounded-[1.25rem] bg-white md:h-[12.5rem] md:w-[42.5rem] md:rounded-[2rem] lg:h-[34.375rem] lg:w-[24rem] lg:rounded-[2.5rem]"
-          >
-            <div className="grid gap-5 px-6 py-8 md:grid-cols-[0.2fr_1fr] md:grid-rows-2 md:gap-0 lg:grid-cols-1 lg:grid-rows-3 lg:text-center">
-              <p className="hidden text-[#2463ff] md:row-span-2 md:block md:items-center md:text-8xl lg:pt-12">
-                {card.index}
-              </p>
-              <p className="text-4xl tracking-wider text-[#261676] lg:py-5">
-                <span className="mr-4 text-[#2463ff] md:hidden">
+        <div className="flex flex-col gap-8 px-0 pt-20 lg:flex-row lg:pt-12">
+          {cards.map((card, i) => (
+            <motion.div
+              variants={divVariants}
+              initial="hidden"
+              animate="visible"
+              custom={i}
+              key={card.index}
+              className="h-[11.5625rem] w-[22.5rem] rounded-[1.25rem] bg-white md:h-[12.5rem] md:w-[42.5rem] md:rounded-[2rem] lg:h-[34.375rem] lg:w-[24rem] lg:rounded-[2.5rem]"
+            >
+              <div className="grid gap-5 px-6 py-8 md:grid-cols-[0.2fr_1fr] md:grid-rows-2 md:gap-0 lg:grid-cols-1 lg:grid-rows-3 lg:text-center">
+                <p className="hidden text-[#2463ff] md:row-span-2 md:block md:items-center md:text-8xl lg:pt-12">
                   {card.index}
-                </span>{" "}
-                {card.title}
-              </p>
-              <p className="leading-4 tracking-wider text-[#887dc0] md:text-xl md:leading-6 lg:text-2xl lg:leading-9">
-                {card.message}
-              </p>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </div>
+                </p>
+                <p className="text-4xl tracking-wider text-[#261676] lg:py-5">
+                  <span className="mr-4 text-[#2463ff] md:hidden">
+                    {card.index}
+                  </span>{" "}
+                  {card.title}
+                </p>
+                <p className="leading-4 tracking-wider text-[#887dc0] md:text-xl md:leading-6 lg:text-2xl lg:leading-9">
+                  {card.message}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
