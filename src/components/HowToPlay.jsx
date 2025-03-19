@@ -1,4 +1,5 @@
 import BackButton from "./BackButton";
+import { motion } from "motion/react";
 
 const cards = [
   {
@@ -22,6 +23,19 @@ const cards = [
 ];
 
 function HowToPlay() {
+  const divVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.2, // Stagger effect (each button comes in one after the other)
+        duration: 0.5,
+        type: "spring",
+      },
+    }),
+  };
+
   return (
     <div className="container mx-auto max-w-7xl px-8 pt-10">
       <div className="flex items-center justify-between">
@@ -35,8 +49,12 @@ function HowToPlay() {
       </div>
 
       <div className="flex flex-col gap-8 px-0 pt-20 lg:flex-row lg:pt-12">
-        {cards.map((card) => (
-          <div
+        {cards.map((card, i) => (
+          <motion.div
+            variants={divVariants}
+            initial="hidden"
+            animate="visible"
+            custom={i}
             key={card.index}
             className="h-[11.5625rem] w-[22.5rem] rounded-[1.25rem] bg-white md:h-[12.5rem] md:w-[42.5rem] md:rounded-[2rem] lg:h-[34.375rem] lg:w-[24rem] lg:rounded-[2.5rem]"
           >
@@ -54,7 +72,7 @@ function HowToPlay() {
                 {card.message}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

@@ -20,35 +20,46 @@ function PickACategory() {
     navigate(`/pick-a-category/${category}`);
   }
 
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: i * 0.2, // Stagger effect (each button comes in one after the other)
+        duration: 0.5,
+        type: "spring",
+      },
+    }),
+  };
+
   return (
-    <div className="mx-auto max-w-7xl pt-8">
-      <div className="flex items-center justify-center">
+    <div className="mx-auto max-w-7xl px-8 pt-8">
+      <div className="flex items-center justify-between">
         <BackButton />
 
         <img
           src="./images/Pick-a-Category.svg"
           alt=""
-          className="mx-auto h-[10.1875rem] w-[28rem]"
+          className="mx-0 md:mx-auto md:h-[10.1875rem] md:w-[28rem]"
         />
       </div>
 
-      <motion.div
-        initial={{ y: 20 }}
-        animate={{ y: 0 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="mt-10 grid grid-cols-3 gap-12 text-5xl text-white"
-      >
-        {Object.keys(categories)?.map((category) => (
-          <button
+      <div className="mt-28 grid grid-cols-1 gap-4 text-3xl text-white md:mt-10 md:grid-cols-2 md:text-5xl lg:grid-cols-3 lg:gap-12">
+        {Object.keys(categories)?.map((category, i) => (
+          <motion.button
+            variants={buttonVariants}
+            initial="hidden"
+            animate="visible"
+            custom={i} // Pass index to stagger
             key={category}
             onClick={() => handleSelectCategory(category)}
-            className="h-[11.875rem] w-[24rem] rounded-[2.5rem] bg-[#2463FF] shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#3b74ff] hover:bg-[#3b74ff] hover:shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#2463ff]"
+            className="h-[4.8125rem] w-[20.25rem] rounded-[1.25rem] bg-[#2463FF] shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#3b74ff] hover:bg-[#3b74ff] hover:shadow-[inset_0px_-4px_0px_1px_#140E66,inset_0px_4px_0px_2px_#2463ff] md:h-[11.416875rem] md:rounded-[2.5rem] lg:h-[11.875rem] lg:w-[24rem] lg:rounded-[2.5rem]"
           >
             {category}
-          </button>
+          </motion.button>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
