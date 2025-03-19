@@ -2,22 +2,41 @@ import { useDispatch, useSelector } from "react-redux";
 import KeyPad from "./KeyPad";
 import { useParams } from "react-router-dom";
 import PauseMenu from "./PauseMenu";
-import { toggleModal } from "../hangmanSlice";
+import { toggleModal, toggleModal2 } from "../hangmanSlice";
+import { useEffect } from "react";
+import WinLoseMenu from "./WinLoseMenu";
 
 function InGame() {
   const word = useSelector((state) => state.hangman.word);
-
-  const { guessedLetters, inCorrectGuesses } = useSelector(
-    (state) => state.hangman,
+  console.log(word);
+  const { guessedLetters, inCorrectGuesses, isGameOver, showModal } =
+    useSelector((state) => state.hangman);
+  const guessedCorrectly = useSelector(
+    (state) => state.hangman.guessedCorrectly,
   );
   const { category } = useParams();
   const progressBar = 100 - (inCorrectGuesses / 8) * 100;
   const dispatch = useDispatch();
-  const showModal = useSelector((state) => state.hangman.showModal);
+
+  useEffect(() => {
+    if (isGameOver) {
+      const timerId = setTimeout(() => {
+        dispatch(toggleModal2());
+      }, 4000);
+
+      return () => clearTimeout(timerId);
+    }
+  }, [isGameOver, dispatch]);
+
+  const modalImage = guessedCorrectly
+    ? "/images/you-win.svg"
+    : "/images/you-lose.svg";
 
   return (
     <>
       {showModal && <PauseMenu />}
+      {isGameOver && <WinLoseMenu imgSrc={modalImage} />}
+
       <div className="mx-auto mb-14 flex max-w-6xl items-center justify-between pt-5">
         <div className="flex items-center gap-12">
           <button
@@ -42,9 +61,9 @@ function InGame() {
       </div>
 
       <div className="flex flex-col items-center">
-        <div className="-z-10 mb-16 flex flex-col items-center gap-4">
+        <div className="-z-10 mb-16 flex flex-col items-center">
           {word.split(" ").map((wordPart, wordIndex) => (
-            <div key={wordIndex} className="flex gap-2">
+            <div key={wordIndex} className="flex gap-4">
               {wordPart.split("").map((char, index) => {
                 const upperChar = char.toUpperCase();
                 const isGuessed = guessedLetters

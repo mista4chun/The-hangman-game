@@ -3,6 +3,7 @@ import BackButton from "./BackButton";
 import { setCategories, selectCategory, startGame } from "../hangmanSlice";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { motion } from "motion/react";
 
 function PickACategory() {
   const categories = useLoaderData();
@@ -15,7 +16,7 @@ function PickACategory() {
 
   function handleSelectCategory(category) {
     dispatch(selectCategory({ category, words: categories[category] }));
-    dispatch(startGame())
+    dispatch(startGame());
     navigate(`/pick-a-category/${category}`);
   }
 
@@ -31,7 +32,13 @@ function PickACategory() {
         />
       </div>
 
-      <div className="mt-10 grid grid-cols-3 gap-12 text-5xl text-white">
+      <motion.div
+        initial={{ y: 20 }}
+        animate={{ y: 0 }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        className="mt-10 grid grid-cols-3 gap-12 text-5xl text-white"
+      >
         {Object.keys(categories)?.map((category) => (
           <button
             key={category}
@@ -41,7 +48,7 @@ function PickACategory() {
             {category}
           </button>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }

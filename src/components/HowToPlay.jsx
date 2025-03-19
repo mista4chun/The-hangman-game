@@ -1,4 +1,3 @@
-
 import BackButton from "./BackButton";
 
 const cards = [
@@ -6,7 +5,7 @@ const cards = [
     index: "01",
     title: "Choose a category",
     message:
-      "choose a word category, like animals or movies. The computer then randomly selects a secret word from that topic and shows you blanks for each letter of the word.",
+      "First, choose a word category, like animals or movies. The computer then randomly selects a secret word from that topic and shows you blanks for each letter of the word.",
   },
   {
     index: "02",
@@ -24,28 +23,34 @@ const cards = [
 
 function HowToPlay() {
   return (
-    <div className="mx-auto pt-10 max-w-7xl ">
-      <div className="flex items-center justify-center">
+    <div className="container mx-auto max-w-7xl px-8 pt-10">
+      <div className="flex items-center justify-between">
         <BackButton />
 
         <img
           src="./images/How-to-Play.svg"
           alt=""
-          className="z-30 mx-auto h-[10.1875rem] w-[28rem]"
+          className="mx-0 md:mx-auto md:h-[10.1875rem] md:w-[28rem]"
         />
       </div>
-      <div className="grid grid-cols-3 pt-10">
+
+      <div className="flex flex-col gap-8 px-0 pt-20 lg:flex-row lg:pt-12">
         {cards.map((card) => (
           <div
             key={card.index}
-            className="h-[34.375rem] w-[24rem] rounded-[2.5rem] bg-white"
+            className="h-[11.5625rem] w-[22.5rem] rounded-[1.25rem] bg-white md:h-[12.5rem] md:w-[42.5rem] md:rounded-[2rem] lg:h-[34.375rem] lg:w-[24rem] lg:rounded-[2.5rem]"
           >
-            <div className="flex flex-col items-center justify-center gap-8 px-6 pt-16 text-center">
-              <p className="text-8xl text-[#2463ff]">{card.index}</p>
-              <p className="text-5xl tracking-wider text-[#261676]">
+            <div className="grid gap-5 px-6 py-8 md:grid-cols-[0.2fr_1fr] md:grid-rows-2 md:gap-0 lg:grid-cols-1 lg:grid-rows-3 lg:text-center">
+              <p className="hidden text-[#2463ff] md:row-span-2 md:block md:items-center md:text-8xl lg:pt-12">
+                {card.index}
+              </p>
+              <p className="text-4xl tracking-wider text-[#261676] lg:py-5">
+                <span className="mr-4 text-[#2463ff] md:hidden">
+                  {card.index}
+                </span>{" "}
                 {card.title}
               </p>
-              <p className="max-w-xs text-3xl leading-10 text-[#887dc0]">
+              <p className="leading-4 tracking-wider text-[#887dc0] md:text-xl md:leading-6 lg:text-2xl lg:leading-9">
                 {card.message}
               </p>
             </div>
