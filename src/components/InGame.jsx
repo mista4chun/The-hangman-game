@@ -65,7 +65,7 @@ function InGame() {
           <div className="flex items-center gap-7 md:gap-10">
             <div className="flex h-[1rem] w-[3.5625rem] items-center rounded-full bg-white px-1.5 md:h-[1.9375rem] md:w-[10rem] md:px-3 lg:h-[1.9375rem] lg:w-[15rem]">
               <div
-                className="h-[0.5rem] rounded-full bg-[#2B1677] transition-all duration-500 md:h-[0.8125] lg:h-[0.8125rem]"
+                className="h-[0.5rem] rounded-full bg-[#2B1677] transition-all duration-500 md:h-[0.8125rem] "
                 style={{ width: `${progressBar}%` }}
               ></div>
             </div>
