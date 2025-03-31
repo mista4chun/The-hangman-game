@@ -1,10 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const encode = (str) => btoa(encodeURIComponent(str));
+const decode = (str) => decodeURIComponent(atob(str));
+
+const storedWord = localStorage.getItem("hangmanWord");
 const initialState = {
   category: null,
   categories: {},
   guessedLetters: [],
-  word: localStorage.getItem("hangmanWord") || "",
+  word: storedWord ? decode(storedWord) : "",
   inCorrectGuesses: 0,
   showModal: false,
   showModal2: false,
@@ -25,7 +29,7 @@ const hangmanSlice = createSlice({
       state.word =
         words[Math.floor(Math.random() * words.length)].name.toUpperCase();
 
-      localStorage.setItem("hangmanWord", state.word);
+      localStorage.setItem("hangmanWord", encode(state.word));
       state.guessedLetters = [];
       state.inCorrectGuesses = 0;
       state.isGameOver = false;
@@ -76,7 +80,7 @@ const hangmanSlice = createSlice({
         const words = state.categories[state.category];
         state.word =
           words[Math.floor(Math.random() * words.length)].name.toUpperCase();
-        localStorage.setItem("hangmanWord", state.word);
+        localStorage.setItem("hangmanWord", encode(state.word));
       } else {
         state.word = "";
       }
